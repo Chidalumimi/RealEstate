@@ -1,0 +1,97 @@
+<%- include ('partials/header') -%>
+
+
+<% if (typeof error != 'undefined') { %>
+
+        <% error.forEach(function(error){ %>
+
+              <h5 style="color: red;"><%= error.msg %></h5>
+
+        <% }) %>
+
+      <% } %>
+
+      <% if(success_msg != '') {%>
+        <h6 style="color:green"><%= success_msg %></h6>
+
+      <% } %>
+
+      <% if(error_msg != '') { %>
+
+        <h6 style="color:red"><%= error_msg %></h6>
+
+      <% } %>
+
+    <div class="form-1">
+
+
+        <form action="/realtor/addProp" method="POST" enctype="multipart/form-data">
+            <h2 class="adds">ADD PROPERTY</h2>
+            <a class="addview" href="/realtor/viewProp">VIEW PROPERTIES</a>
+            <div class="logged">
+            <p>LOGGED IN REALTOR: <strong><%= username %></strong></p>
+            </div>
+
+
+            <div class="alert">
+                <%- include ('partials/messages') %>
+
+            </div>
+
+              <p><input type="text" name="pName"  placeholder="Property Name"></p>
+
+              <% let pTypes = ["Flat/Apartment", "House", "Land","Commercial Property"] %>
+
+              <select name="pType" id="" class="ptype">
+                  <option value="">Property Type</option>
+                  <% pTypes.forEach(function(ptype){ %>
+
+                      <option value="<%= ptype %>"><%= ptype %></option>
+
+                  <% }) %>
+              </select><br>
+
+              <% let rooms = ["1", "2", "3","4", "5", "6+"] %>
+
+              <select name="room" id="" class="room">
+                  <option value="">Rooms</option>
+                  <% rooms.forEach(function(room){ %>
+
+                      <option value="<%= room %>"><%= room %></option>
+
+                  <% }) %>
+              </select><br>
+
+
+              <p><input type="text" name="pAddress"  placeholder="Property Address"></p>
+
+              <% let locations = ['Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue', 'Borno', 'Cross River', 'Delta', 'Ebonyi', 'Edo',  'Ekiti', 'Enugu', 'Gombe', 'Imo', 'Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Kogi', 'Kwara', 'Lagos', 'Nasarawa', 'Niger', 'Ogun', 'Ondo', 'Osun', 'Oyo', 'Plateau', 'Rivers', 'Sokoto', 'Taraba', 'Yobe', 'Zamfara'] %>
+             <select name="city" id="" class="job">
+                 <option value="">Your Location</option>
+                     <% locations.forEach(function(location){ %>
+
+                         <option value="<%= location %>"><%= location %></option>
+
+                     <% }) %>
+
+
+             </select>
+
+              <p><input type="Number" name="price"  placeholder="Amount"></p>
+
+             <p><input type="text" name="year"  placeholder="Year Established"></p>
+
+             <div class="loggeed">
+            <p>Profile Picture: <input type="file" name="image" placeholder="Upload a picture of the Property"></p>
+            </div>
+
+             <input type="submit" name="signup" value="Click to Add">
+
+         </form>
+
+    </div>
+
+
+
+
+<%- include ('partials/footer') -%>

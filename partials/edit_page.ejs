@@ -1,0 +1,81 @@
+<%- include ('partials/header') %>
+
+
+<% if (typeof error != 'undefined') { %>
+
+        <% error.forEach(function(error){ %>
+
+              <h5 style="color: red;"><%= error.msg %></h5>
+
+        <% }) %>
+
+      <% } %>
+
+      <% if(success_msg != '') {%>
+        <h6 style="color:green"><%= success_msg %></h6>
+
+      <% } %>
+
+      <% if(error_msg != '') { %>
+
+        <h6 style="color:red"><%= error_msg %></h6>
+
+      <% } %>
+
+
+<div class="form-1">
+		<h2>Edit Property</h2>
+
+			<% record.forEach((r) => { %>
+
+				<form action="/realtor/edit/<%= r._id %>" method="post">
+					<p> <input type="text" name="pName" value="<%= r.pName %>"></p>
+
+					<% let pTypes = ["Flat/Apartment", "House", "Land","Commercial Property"] %>
+
+		              <select name="pType" id="" class="pType">
+		                  <option value="">Property Type</option>
+		                  <% pTypes.forEach(function(pType){ %>
+
+		                      <option value="<%= r.pType %>"><%= pType %></option>
+
+		                  <% }) %>
+		              </select><br>
+
+		              <div class="form-group">
+
+
+		            <% let rooms = ["1", "2", "3","4", "5", "6+"] %>
+
+		              <select name="room" id="" class="room">
+		                  <option value="">Rooms</option>
+		                  <% rooms.forEach(function(room){ %>
+
+		                      <option value="<%= r.room %>"><%= room %></option>
+
+		                  <% }) %>
+		              </select>
+
+
+
+					<p>Price: <input type="number"  name="price" value="<%= r.price %>" placeholder="Price"></p>
+
+					<p><input type="text" name="pAddress" value="<%= r.pAddress %>"  placeholder="Property Address"></p>
+
+		             <p><input type="text" name="year" value="<%= r.year %>"  placeholder="Year Established"></p>
+
+						<div class="loggeed">
+            	<p>Profile Picture: <input type="file" name="image" placeholder="Upload a picture of the Property"></p>
+            </div>
+						<input type="submit" name="" value="Click to Edit">
+
+				</form>
+
+
+			<% }) %>
+			</div>
+
+
+
+
+<%- include ('partials/footer') %>
